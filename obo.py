@@ -40,7 +40,7 @@ stopwords = [
     'primeira', 'primeiras', 'primeiro', 'primeiros', 'própria', 'próprias', 'próprio',
     'próprios', 'próxima', 'próximas', 'próximo', 'próximos', 'pude', 'pôde', 'p'
 ]
-def stripTags(pageContents):
+def removerHtml(pageContents):
     pageContents = str(pageContents)
     startLoc = pageContents.find("<p>")
     endLoc = pageContents.rfind("<br/>")
@@ -65,23 +65,23 @@ def stripTags(pageContents):
 # Given a text string, remove all non-alphanumeric
 # characters (using Unicode definition of alphanumeric).
 
-def stripNonAlphaNum(text):
+def dividindoTexto(text):
     import re
     return re.compile(r'\W+', re.UNICODE).split(text)
 
 # Dada uma lista de palavras, retorna um dicionário de pares palavra-frequência.
 
-def wordListToFreqDict(wordlist):
+def dicionarioPalavras(wordlist):
     wordfreq = [wordlist.count(p) for p in wordlist]
     return dict(list(zip(wordlist,wordfreq)))
 
 # Ordena um dicionário de pares palavra-frequência em ordem decrescente de frequência.
 
-def sortFreqDict(freqdict):
+def ordemDecrescente(freqdict):
     aux = [(freqdict[key], key) for key in freqdict]
     aux.sort()
     aux.reverse()
     return aux
 
-def removeStopwords(wordlist, stopwords):
+def removerPalavraComum(wordlist, stopwords):
     return [w for w in wordlist if w not in stopwords]
