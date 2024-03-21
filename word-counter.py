@@ -1,17 +1,17 @@
 import re
 import urllib.request
-import obo
+import back
 import concurrent.futures
 
 def process_url(url):
     response = urllib.request.urlopen(url) #abrindo a url
     html = response.read().decode('UTF-8') #decodificando para texto usando UTF-8
-    text = obo.removerHtml(html).lower() #Removendo tags HTML e colocando o texto para minúsculo
-    wordlist = obo.dividindoTexto(text) #Divide o texto em uma sequência não alfa-numérica
+    text = back.removerHtml(html).lower() #Removendo tags HTML e colocando o texto para minúsculo
+    wordlist = back.dividindoTexto(text) #Divide o texto em uma sequência não alfa-numérica
     wordlist = [word for word in wordlist if not word.isdigit()]  #Itera sobre cada palavra na lista "wordlist" e verifica se ela consiste apenas de dígitos usando o método 'isdigit()'
-    wordlist = obo.removerPalavraComum(wordlist, obo.stopwords) #Remove palavras comuns e irrelevantes
-    dictionary = obo.dicionarioPalavras(wordlist) #Cria um dicionário de frequência das palavras
-    sorteddict = obo.ordemDecrescente(dictionary) #Faz a ordenação das palavras em ordem decrescente
+    wordlist = back.removerPalavraComum(wordlist, back.stopwords) #Remove palavras comuns e irrelevantes
+    dictionary = back.dicionarioPalavras(wordlist) #Cria um dicionário de frequência das palavras
+    sorteddict = back.ordemDecrescente(dictionary) #Faz a ordenação das palavras em ordem decrescente
     
     return sorteddict
 
